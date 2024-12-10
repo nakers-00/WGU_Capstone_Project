@@ -136,9 +136,10 @@ load_package_data(package_hash_table, package_data)
 # Delivers packages using the method defined on line 96-121
 deliver_packages(delivery_route, package_hash_table, distance_data)
 
+print(package_data)
 print(final_route)
 print(delivery_route.distance_list)
-#
+
 # line_graph(delivery_route.distance_list)
 
 # User command line interface
