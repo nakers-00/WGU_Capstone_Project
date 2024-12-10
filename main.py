@@ -136,9 +136,10 @@ load_package_data(package_hash_table, package_data)
 # Delivers packages using the method defined on line 96-121
 deliver_packages(delivery_route, package_hash_table, distance_data)
 
-print(package_data)
-print(final_route)
-print(delivery_route.distance_list)
+route_string = f""""""
+for delivery in final_route:
+    route_string += f"{delivery} "
+
 
 # line_graph(delivery_route.distance_list)
 
@@ -147,29 +148,57 @@ print(delivery_route.distance_list)
 # for-loops nested within the while-loop, all their complexities will not multiply duo to their organization.
 # Therefore, the simplified time complexity is O(n^3).
 # Space complexity is O(1)
-# class Main:
-#     # While loop used so that the program will continue to ask for input until the user decides to exit the program.
-#     while True:
-#         # This try-except block encompasses the interface code and will close the program if user input causes a
-#         # Value Error
-#         try:
-#             # Gets input from user
-#             user_input = input("Would you like to see your delivery route?(Y/N) - "
-#                                "type 'exit' to close program: ")
-#             # Checks if the user entered 'Exit'. If so, the program is terminated
-#             if user_input.lower() == 'exit':
-#                 print("Goodbye!")
-#                 exit()
-#             elif user_input == "Y":
-#                 print(final_route)
-#
-#             # user_input = input("If you would like to view a single package, please enter the package ID number. Type "
-#             #                    "'All' to view all packages - type 'exit to close program: ")
-#             # # Checks if the user entered 'Exit'. If so, the program is terminated
-#             # if user_input.lower() == 'exit':
-#             #     print("Goodbye!")
-#             #     exit()
-#
-#         except ValueError:
-#             print("Invalid input. Please ensure that you are entering valid inputs into each field. Closing Program.")
-#             exit()
+class Main:
+    # While loop used so that the program will continue to ask for input until the user decides to exit the program.
+    while True:
+        # This try-except block encompasses the interface code and will close the program if user input causes a
+        # Value Error
+        try:
+            # Gets input from user
+            user_input = input("Hello! Would you like to see your delivery route?(Y/N) - "
+                               "type 'exit' to close program: ")
+            # Checks if the user entered 'Exit'. If so, the program is terminated
+            if user_input.lower() == 'exit':
+                print("Goodbye!")
+                exit()
+            elif user_input == "Y":
+                print(f"""\nOrder in which to delivery packages ('0' represents the shipping hub): 
+{route_string} \n""")
+
+            bar_graph = input("Would you like to view a bar graph showing how many packages are delivered to each "
+                              "address?(Y/N) - type 'exit' to close program:")
+
+            if bar_graph.lower() == 'exit':
+                print("Goodbye!")
+                exit()
+            elif bar_graph == "Y":
+                print("Bar graph space holder")
+
+            line_graph = input("Would you like to view a line graph representing the distance of the route?(Y/N) - "
+                               "type 'exit' to close program:")
+
+            if line_graph.lower() == 'exit':
+                print("Goodbye!")
+                exit()
+            elif line_graph == "Y":
+                print("Line graph space holder")
+
+            directed_graph = input("Would you like to view a directed graph representing order of package "
+                                   "deliveries?(Y/N) - type 'exit' to close program:")
+
+            if directed_graph.lower() == 'exit':
+                print("Goodbye!")
+                exit()
+            elif directed_graph == "Y":
+                print("Directed graph space holder")
+
+            # user_input = input("If you would like to view a single package, please enter the package ID number. Type "
+            #                    "'All' to view all packages - type 'exit to close program: ")
+            # # Checks if the user entered 'Exit'. If so, the program is terminated
+            # if user_input.lower() == 'exit':
+            #     print("Goodbye!")
+            #     exit()
+
+        except ValueError:
+            print("Invalid input. Please ensure that you are entering valid inputs into each field. Closing Program.")
+            exit()

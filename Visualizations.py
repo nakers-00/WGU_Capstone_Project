@@ -106,11 +106,10 @@ def bar_graph(address_info, package_info):
                 count += 1
         num_packages.append(count)
 
-
     addresses = address_list
     packages = num_packages
 
-    plt.figure(figsize=(10,8))
+    plt.figure(figsize=(10, 8))
     plt.bar(addresses, packages)
     plt.xticks(rotation=90, ha='center')
 
@@ -122,6 +121,3 @@ def bar_graph(address_info, package_info):
 
     plt.tight_layout()
     plt.show()
-
-
-bar_graph(address_data, package_data)
