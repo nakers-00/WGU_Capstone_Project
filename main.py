@@ -5,7 +5,7 @@ from Hashtable import HashTable
 from Package import Package
 from Route import Route
 from builtins import ValueError
-from Visualizations import line_graph
+from Visualizations import bar_graph, line_graph, directed_graph
 
 package_data = Functions.read_package_csv('package.csv')
 address_data = Functions.read_address_csv('addresses.csv')
@@ -117,7 +117,7 @@ def deliver_packages(route, hash_table, distance_info):
         # Change the route current address to the address of the most recently delivered package
         route.current_address = delivery_address
 
-        route.distance_list.append(round(route.distance_traveled, 0))
+        route.distance_list.append(round(route.distance_traveled, 1))
         # Add stop to final_route
         final_route.append(package_delivered_id)
     # O(n)
@@ -126,7 +126,7 @@ def deliver_packages(route, hash_table, distance_info):
     distance_to_hub = distance_between(route.current_address, '4001 South 700 East', distance_info)
     route.distance_traveled += distance_to_hub
     route.current_address = '4001 South 700 East'
-    route.distance_list.append(round(route.distance_traveled, 0))
+    route.distance_list.append(round(route.distance_traveled, 1))
     final_route.append(0)
 
 
@@ -140,8 +140,6 @@ route_string = f""""""
 for delivery in final_route:
     route_string += f"{delivery} "
 
-
-# line_graph(delivery_route.distance_list)
 
 # User command line interface
 # Overall time complexity is O(n^3) due to the while-loop containing nested for-loops. Although there are multiple
@@ -162,35 +160,34 @@ class Main:
                 print("Goodbye!")
                 exit()
             elif user_input == "Y":
-                print(f"""\nOrder in which to delivery packages ('0' represents the shipping hub): 
+                print(f"""\nOrder in which to delivery packages ('0' represents the shipping hub):
 {route_string} \n""")
 
-            bar_graph = input("Would you like to view a bar graph showing how many packages are delivered to each "
-                              "address?(Y/N) - type 'exit' to close program:")
-
-            if bar_graph.lower() == 'exit':
+            bar_graph_question = input(
+                "Would you like to view a bar graph showing how many packages are delivered to each "
+                "address?(Y/N) - type 'exit' to close program:")
+            if bar_graph_question.lower() == 'exit':
                 print("Goodbye!")
                 exit()
-            elif bar_graph == "Y":
-                print("Bar graph space holder")
+            elif bar_graph_question == "Y":
+                bar_graph(address_data, package_data)
 
-            line_graph = input("Would you like to view a line graph representing the distance of the route?(Y/N) - "
-                               "type 'exit' to close program:")
-
-            if line_graph.lower() == 'exit':
+            line_graph_question = input(
+                "Would you like to view a line graph representing the distance of the route?(Y/N) - "
+                "type 'exit' to close program:")
+            if line_graph_question.lower() == 'exit':
                 print("Goodbye!")
                 exit()
-            elif line_graph == "Y":
-                print("Line graph space holder")
+            elif line_graph_question == "Y":
+                line_graph(delivery_route.distance_list)
 
-            directed_graph = input("Would you like to view a directed graph representing order of package "
-                                   "deliveries?(Y/N) - type 'exit' to close program:")
-
-            if directed_graph.lower() == 'exit':
+            directed_graph_question = input("Would you like to view a directed graph representing order of package "
+                                            "deliveries?(Y/N) - type 'exit' to close program:")
+            if directed_graph_question.lower() == 'exit':
                 print("Goodbye!")
                 exit()
-            elif directed_graph == "Y":
-                print("Directed graph space holder")
+            elif directed_graph_question == "Y":
+                directed_graph(final_route)
 
             # user_input = input("If you would like to view a single package, please enter the package ID number. Type "
             #                    "'All' to view all packages - type 'exit to close program: ")
