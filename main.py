@@ -1,4 +1,4 @@
-# Course: C950 - Name: Noah Akers - Student ID: 011359614
+# Course: C964 - Name: Noah Akers - Student ID: 011359614
 from datetime import timedelta
 import Functions
 from Hashtable import HashTable
@@ -13,8 +13,8 @@ distance_data = Functions.read_distance_csv('distances.csv')
 
 # create inventory list based on the package data
 inventory_list = []
-for package in package_data:
-    p_num = int(package[0])
+for pack in package_data:
+    p_num = int(pack[0])
     inventory_list.append(p_num)
 
 delivery_route = Route(inventory_list, 0.0,
@@ -101,7 +101,7 @@ def min_distance_from(from_address, route_not_delivered, hash_table):
 # distance_between() (O(n)) methods. Due to the time complexities and organization of these methods, the time complexity
 # of deliver_packages() simplifies to O(n^3).
 # O(1) space complexity
-def deliver_packages(route, hash_table, distance_info):
+def calculate_route(route, hash_table, distance_info):
     # O(n) time complexity from while loop
     while len(route.not_delivered) > 0:
         # O(n^2) time complexity
@@ -134,7 +134,7 @@ def deliver_packages(route, hash_table, distance_info):
 load_package_data(package_hash_table, package_data)
 
 # Delivers packages using the method defined on line 96-121
-deliver_packages(delivery_route, package_hash_table, distance_data)
+calculate_route(delivery_route, package_hash_table, distance_data)
 
 route_string = f""""""
 for delivery in final_route:
@@ -159,43 +159,56 @@ class Main:
             if user_input.lower() == 'exit':
                 print("Goodbye!")
                 exit()
-            elif user_input == "Y":
-                print(f"""\nOrder in which to delivery packages ('0' represents the shipping hub):
+            elif user_input.upper() == "Y":
+                print(f"""\nBelow is the order in which to deliver the packages ('0' represents the shipping hub):
 {route_string} \n""")
+            else:
+                print("Invalid input. Please ensure that you are following the prompts. Closing Program.")
+                exit()
 
             bar_graph_question = input(
                 "Would you like to view a bar graph showing how many packages are delivered to each "
-                "address?(Y/N) - type 'exit' to close program:")
+                "address?(Y/N) - type 'exit' to close program: ")
             if bar_graph_question.lower() == 'exit':
                 print("Goodbye!")
                 exit()
-            elif bar_graph_question == "Y":
+            elif bar_graph_question.upper() == "Y":
                 bar_graph(address_data, package_data)
+            elif bar_graph_question.upper() == "N":
+                print("Okay, skipping bar graph.\n")
+            else:
+                print("Invalid input. Please ensure that you are following the prompts. Closing Program.")
+                exit()
 
             line_graph_question = input(
                 "Would you like to view a line graph representing the distance of the route?(Y/N) - "
-                "type 'exit' to close program:")
+                "type 'exit' to close program: ")
             if line_graph_question.lower() == 'exit':
                 print("Goodbye!")
                 exit()
-            elif line_graph_question == "Y":
+            elif line_graph_question.upper() == "Y":
                 line_graph(delivery_route.distance_list)
+            elif line_graph_question.upper() == "N":
+                print("Okay, skipping line graph.\n")
+            else:
+                print("Invalid input. Please ensure that you are following the prompts. Closing Program.")
+                exit()
 
             directed_graph_question = input("Would you like to view a directed graph representing order of package "
-                                            "deliveries?(Y/N) - type 'exit' to close program:")
+                                            "deliveries?(Y/N) - type 'exit' to close program: ")
             if directed_graph_question.lower() == 'exit':
                 print("Goodbye!")
                 exit()
-            elif directed_graph_question == "Y":
+            elif directed_graph_question.upper() == "Y":
                 directed_graph(final_route)
-
-            # user_input = input("If you would like to view a single package, please enter the package ID number. Type "
-            #                    "'All' to view all packages - type 'exit to close program: ")
-            # # Checks if the user entered 'Exit'. If so, the program is terminated
-            # if user_input.lower() == 'exit':
-            #     print("Goodbye!")
-            #     exit()
+                exit()
+            elif directed_graph_question.upper() == "N":
+                print("Okay, skipping directed graph.\n")
+                exit()
+            else:
+                print("Invalid input. Please ensure that you are following the prompts. Closing Program.")
+                exit()
 
         except ValueError:
-            print("Invalid input. Please ensure that you are entering valid inputs into each field. Closing Program.")
+            print("Invalid input. Please ensure that you are following the prompts. Closing Program.")
             exit()
