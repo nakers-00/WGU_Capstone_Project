@@ -1,5 +1,6 @@
 import csv
 
+
 # This is a simple read csv method, each of the csv files will be read with the same method.
 
 def read_csv(filename):

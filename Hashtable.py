@@ -1,8 +1,5 @@
 # This file is the hash table that will be used to store package info.
-# Create hash table class with chaining. This hash table takes in package ID as the key and package objects as the
-# value. Therefore, it holds all necessary data components in the package object and each are easily and efficiently
-# accessible.
-# This hash table has an average time complexity of O(1) and a worst-case of O(n). The space complexity is O(n).
+
 class HashTable:
     # Constructor with initial length of the table to 40 if not specified
     def __init__(self, initial_cap=40):

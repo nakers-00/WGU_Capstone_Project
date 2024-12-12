@@ -23,11 +23,6 @@ benchmark_hash_table = HashTable()
 benchmark_route = [0]
 
 
-# This method takes a hash table and package information as input and loops through the package information array to
-# create package objects and insert them into the hash table
-# O(n^2) time complexity because the for loop calls hash_table.insert(), which is a method of the HashTable class and
-# contains a for-loop
-# Space complexity O(1)
 def load_package_data(hash_table, package_info):
     # O(n) time complexity due to the for loop
     for p in package_info:
@@ -39,10 +34,6 @@ def load_package_data(hash_table, package_info):
         hash_table.insert(p_id, package)
 
 
-# The following methods will be involved in the actual implementation of the nearest neighbor algorithm
-# This method returns the index of an address in the array input as address_info
-# O(n) due to the for-loop
-# O(1) space complexity
 def find_address_index(address, address_info):
     # O(n) time complexity due to the for loop
     for item in address_info:
@@ -50,16 +41,11 @@ def find_address_index(address, address_info):
             return item[0]
 
 
-# This method finds the distance between two given addresses. This method has a time complexity of O(n) because it
-# calls find_address_index which has a for-loop and is therefore O(n)
-# Space complexity is O(1)
 def distance_between(address1, address2, distance_info):
     # Get the index of each address in the address_data array
     address1_index = int(find_address_index(address1, address_data))
     address2_index = int(find_address_index(address2, address_data))
 
-    # The indices from address_data correspond to the indices in distance_data, so simply plug in those indices to
-    # find the distance between the two addresses
     distance = distance_info[address1_index][address2_index]
     distance = float(distance)
     return distance
@@ -89,5 +75,4 @@ load_package_data(benchmark_hash_table, package_data)
 
 calculate_benchmark(benchmark_delivery_route, benchmark_hash_table, distance_data)
 
-print(benchmark_route)
 print(benchmark_delivery_route.distance_traveled)
